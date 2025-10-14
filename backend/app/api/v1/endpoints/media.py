@@ -23,8 +23,14 @@ comfy_client = ComfyUIClient()
 async def upload_media(
     file: UploadFile = File(...),
     mode: MediaProcessingMode = Form(default=MediaProcessingMode.direct),
-    comfyui_endpoint: Optional[str] = Form(default=None),
-    notes: Optional[str] = Form(default=None),
+    comfyui_endpoint: Optional[str] = Form(
+        default=None,
+        description="【文本输入】本次任务使用的 ComfyUI 服务器地址",
+    ),
+    notes: Optional[str] = Form(
+        default=None,
+        description="【文本输入】素材说明或期望效果",
+    ),
 ) -> MediaUploadResponse:
     """保存上传的媒体文件，并在需要时触发 ComfyUI 处理。"""
     job_id, path = storage_service.persist_upload(file, job_id=new_job_id("media"))

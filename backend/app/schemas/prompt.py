@@ -17,21 +17,21 @@ class SubmissionTarget(str, Enum):
 class TextPromptRequest(BaseModel):
     """Request payload for text-only prompt generation."""
 
-    text: str = Field(..., description="User provided text prompt or script")
+    text: str = Field(..., description="【文本输入】用户提供的脚本或描述内容")
     reference_style: Optional[str] = Field(
         default=None,
-        description="Optional reference style or mood for the target video",
+        description="【文本输入】可选的参考风格或情绪标签",
     )
     target_model: Optional[str] = Field(
         default=None,
-        description="Specific model identifier to route prompt generation",
+        description="【文本输入】指定大模型标识（如 gpt-4o-mini、qwen-plus 等）",
     )
     submit_to: SubmissionTarget = Field(
         default=SubmissionTarget.llm,
         description="Where to forward the generated prompt",
     )
     comfyui_endpoint: Optional[str] = Field(
-        default=None, description="Override ComfyUI endpoint for this request"
+        default=None, description="【文本输入】本次请求使用的 ComfyUI 服务器地址"
     )
 
 
